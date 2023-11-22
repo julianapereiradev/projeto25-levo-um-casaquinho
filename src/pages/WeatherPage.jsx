@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef} from "react";
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 const api = {
     key: import.meta.env.VITE_API_KEY,
@@ -15,9 +16,12 @@ export default function WeatherPage() {
     const [weather, setWeather] = useState({});
     const [imageWeather, setImageWeather] = useState("");
     const [temperatureColor, setTemperatureColor] = useState("");
-  
+    const inputRef = useRef(null);
+    
     useEffect(() => {
       // Esta função será executada sempre que os dados do clima forem atualizados
+      inputRef.current.focus();
+      
       const fetchWeatherIcon = async () => {
         try {
           if (Object.keys(weather).length !== 0) {
@@ -80,7 +84,11 @@ export default function WeatherPage() {
           console.log("resposta.data for searchPressed:", resposta.data);
         })
         .catch((erro) => {
-          alert(erro.response.data.message)
+          console.log('erro aqui', erro)
+          Swal.fire({
+            title: "Erro 404:",
+            text: "A cidade que você digitou não existe!"
+          });
         });
     }
   
@@ -140,6 +148,7 @@ export default function WeatherPage() {
       <h1>Levo um casaquinho?</h1>
 
       <input
+       ref={inputRef} 
         type="text"
         placeholder="Procure por uma cidade"
         onChange={(e) => setSearch(e.target.value)}
