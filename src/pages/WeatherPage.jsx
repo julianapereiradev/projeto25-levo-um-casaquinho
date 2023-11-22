@@ -65,11 +65,10 @@ export default function WeatherPage() {
   
       fetchWeatherIcon();
       defineTemperatureColor();
-    }, [weather]); // Execute sempre que os dados do clima forem alterados
+    }, [weather]);
   
   
     function searchPressed() {
-      console.log("search aqui:", search);
   
       const promise = axios.get(
         `${api.base}weather?q=${search}&units=${unit}&APPID=${api.key}&lang=pt_br`
@@ -81,11 +80,7 @@ export default function WeatherPage() {
           console.log("resposta.data for searchPressed:", resposta.data);
         })
         .catch((erro) => {
-          alert(erro.response.data.message);
-          console.log(
-            "erro em: GET no ItemHoje para recarregar lista Hoje:",
-            erro
-          );
+          alert(erro.response.data.message)
         });
     }
   
@@ -139,8 +134,6 @@ export default function WeatherPage() {
           });
       }
     }
-  
-  console.log("image weather aqui", imageWeather)
     
     return (
         <>
