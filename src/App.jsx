@@ -12,6 +12,7 @@ function App() {
   const [unit, setUnit] = useState("metric");
   const [weather, setWeather] = useState({});
   const [imageWeather, setImageWeather] = useState("");
+  const [temperatureColor, setTemperatureColor] = useState("");
 
   useEffect(() => {
     // Esta função será executada sempre que os dados do clima forem atualizados
@@ -29,7 +30,39 @@ function App() {
       }
     };
 
+    const defineTemperatureColor = () => {
+      if (Object.keys(weather).length !== 0) {
+        const weatherMain = weather.weather[0].main;
+        switch (weatherMain) {
+          case "Clear":
+            setTemperatureColor("orange");
+            break;
+          case "Clouds":
+            setTemperatureColor("darkgray");
+            break;
+          case "Rain":
+            setTemperatureColor("blue");
+            break;
+          case "Snow":
+            setTemperatureColor("slategray");
+            break;
+          case "Thunderstorm":
+            setTemperatureColor("purple");
+            break;
+          case "Drizzle":
+            setTemperatureColor("lightblue");
+            break;
+          case "Mist":
+            setTemperatureColor("lightgray");
+            break;
+          default:
+            setTemperatureColor("");
+        }
+      }
+    };
+
     fetchWeatherIcon();
+    defineTemperatureColor();
   }, [weather]); // Execute sempre que os dados do clima forem alterados
 
 
@@ -129,11 +162,11 @@ console.log("image weather aqui", imageWeather)
 
           <p>Imagem: <img src={imageWeather}/></p>
 
-          <p>
+          <p style={{ color: temperatureColor }}>
             Temperatura: {Math.round(weather.main.temp)}{" "}
             {unit === "metric" ? "°C" : "°F"}
           </p>
-
+          
           <p>Tempo.descrição: {weather.weather[0].description}</p>
 
           <p>Mínima: {Math.round(weather.main.temp_min)} {unit === "metric" ? "°C" : "°F"}</p>
@@ -145,6 +178,8 @@ console.log("image weather aqui", imageWeather)
           <p>Velocidade do vento: {weather.wind.speed} {unit === "metric" ? "m/s" : "milhas/hora"}</p>
 
           <p>Data de hoje: {dataConvertida} </p>
+
+          <p>Nome que define cor da temp: {weather.weather[0].main}</p>
 
           {unit === "metric" ? 
           (weather.main.temp_min < 17 || weather.main.temp_max < 17 ? ("Você deve levar um casaquinho!"):("Não, você não deve levar um casaquinho!"))
