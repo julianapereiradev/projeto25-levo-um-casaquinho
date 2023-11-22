@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef} from "react";
 import axios from "axios";
 import Swal from 'sweetalert2'
+import withReactContent from "sweetalert2-react-content";
 
 const api = {
     key: import.meta.env.VITE_API_KEY,
@@ -17,6 +18,8 @@ export default function WeatherPage() {
     const [imageWeather, setImageWeather] = useState("");
     const [temperatureColor, setTemperatureColor] = useState("");
     const inputRef = useRef(null);
+    const MySwal = withReactContent(Swal)
+    
     
     useEffect(() => {
       // Esta função será executada sempre que os dados do clima forem atualizados
@@ -71,6 +74,10 @@ export default function WeatherPage() {
       defineTemperatureColor();
     }, [weather]);
   
+
+    function ModalContent() {
+      return <p>A cidade digitada não existe!</p>
+    }
   
     function searchPressed() {
   
@@ -85,9 +92,11 @@ export default function WeatherPage() {
         })
         .catch((erro) => {
           console.log('erro aqui', erro)
-          Swal.fire({
-            title: "Erro 404:",
-            text: "A cidade que você digitou não existe!"
+          MySwal.fire({
+            title: "Oops... 😓",
+            html: <ModalContent />,
+            timer: 5000,
+            confirmButtonText: "OK",
           });
         });
     }
