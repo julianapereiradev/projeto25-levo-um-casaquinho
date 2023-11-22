@@ -3,7 +3,7 @@ import axios from "axios";
 
 const api = {
     key: import.meta.env.VITE_API_KEY,
-    base: "http://api.openweathermap.org/data/2.5/",
+    base: "https://api.openweathermap.org/data/2.5/",
     iconBase: "https://openweathermap.org/img/wn/",
   };
 
