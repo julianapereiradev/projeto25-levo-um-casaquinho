@@ -257,6 +257,20 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { pages } from "../routes/routes";
 import { useNavigate } from "react-router-dom";
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
+import format from 'date-fns-tz/format'
+import ptBR from 'date-fns/locale/pt-BR'
+
+
 
 const api = {
   key: import.meta.env.VITE_API_KEY,
@@ -279,8 +293,9 @@ export default function  WeatherPage() {
   const [temperatureColor, setTemperatureColor] = useState("");
   const inputRef = useRef(null);
   const MySwal = withReactContent(Swal);
-
-
+  const [temperatureList, setTemperatureList] = useState([])
+  const [isACityDefined, setIsACityDefined] = useState(false)
+  const [dataLoaded, setDataLoaded] = useState(false)
 
   useEffect(() => {
     // Esta função será executada sempre que os dados do clima forem atualizados
@@ -406,7 +421,7 @@ export default function  WeatherPage() {
         .catch((erro) => {
           alert(erro.response.data.message);
           console.log(
-            "erro em: GET no ItemHoje para recarregar lista Hoje:",
+            "erro em: GET para mudar changeunit:",
             erro
           );
         });
@@ -423,7 +438,27 @@ export default function  WeatherPage() {
 
  function nextDaysWeather() {
    setSelectedSection("nextDays");
+   const promise = axios.get(
+    `${api.base}forecast?q=${search}&units=${unit}&APPID=${api.key}&lang=pt_br`
+  );
+
+  promise.then(res => {
+    const temps = res.data.list.map((i) => ({
+      time: i.dt_txt,
+      temp: i.main.temp
+    }))
+    setTemperatureList(temps)
+    setIsACityDefined(true)
+    setDataLoaded(true)
+    console.log(temps)
+  })
+  promise.catch((err) => console.log(err.response.data))
  }
+
+ const formatarData = (data) => {
+  return format(new Date(data), 'dd/MM (eee)', { locale: ptBR });
+}
+
 
   return (
     <SignUpContainer>
@@ -532,7 +567,20 @@ export default function  WeatherPage() {
           ) : selectedSection === "nextDays" ? (
             <>
               <p>Renderizacao de nextDaysWeather </p>
-              {/* ... (conteúdo relacionado a nextDaysWeather) ... */}
+              {dataLoaded && (
+        <div>
+          <ResponsiveContainer width={700} height={400}>
+            <LineChart data={temperatureList} margin={{ right: 30, left: 30 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="time" tickFormatter={formatarData} />
+              <YAxis domain={[0, 42]} tickCount={6} />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="temp" name="Temperatura" stroke="#8884d8" activeDot={{ r: 8 }} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      )}
             </>
           ) : null}
         </RightMiddleContainer>
