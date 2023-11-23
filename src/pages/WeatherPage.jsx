@@ -266,7 +266,7 @@ import {
 } from 'recharts'
 import format from 'date-fns-tz/format'
 import ptBR from 'date-fns/locale/pt-BR'
-
+import weathergif from "../images/weathergif.gif"
 
 
 const api = {
@@ -547,7 +547,7 @@ export default function  WeatherPage() {
          </LeftBoxInfo>
           </>
         ) : (
-          <div style={{ background: "yellow" }}>Nada</div>
+          <div style={{display: 'flex', justifyContent: 'center', marginTop: '100px'}}><img src={weathergif} width={'40%'}/></div>
         )}
          <h6>Todos os direitos reservados. 2023.</h6>
         </LeftBox>
@@ -567,7 +567,7 @@ export default function  WeatherPage() {
             <p>Lat: {weather.coord.lat.toFixed(2)}</p>
             <p>Long: {weather.coord.lon.toFixed(2)}</p>
           </div>
-          </>):('nadaaaa')
+          </>):(<div style={{display: 'flex', justifyContent: 'center', marginTop: '100px'}}><img src={weathergif} width={'30%'}/></div>)
           }
 
           </ContainerTitle>
@@ -611,25 +611,13 @@ export default function  WeatherPage() {
             </UseOrNotUseCoat>
           </>
         ) : (
-          <div style={{ background: "green" }}>Nada</div>
+          ''
         )}
             </>
           ) : selectedSection === "nextDays" ? (
             <>
-              <p>Renderizacao de nextDaysWeather </p>
               {dataLoaded && (
                 <>
-       {/* <GraphContainer>
-          <ResponsiveContainer width={900} height={400}>
-            <LineChart data={temperatureList} margin={{ right: 30, left: 30 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#bb0808"/>
-              <XAxis dataKey="time" tickFormatter={formatarData} />
-              <YAxis domain={[0, 42]} tickCount={6} />
-              <Tooltip />
-              <Line type="monotone" dataKey="temp"/>
-            </LineChart>
-          </ResponsiveContainer>
-              </GraphContainer> */}
         <GraphContainer>
         <LineChart
         width={900}
@@ -654,7 +642,7 @@ export default function  WeatherPage() {
         </RightMiddleContainer>
 
         <RightBottomText>
-          <h6>Dados fornecidos pela <span>Open Weather API</span></h6>
+          <h6>Dados fornecidos pela <LinkToOfficialWebsite target="_blank" to={'https://openweathermap.org/'}>Open Weather API</LinkToOfficialWebsite></h6>
         </RightBottomText>
       </RightBox>
 
@@ -822,7 +810,6 @@ const LinkToChangePage = styled(Link)`
 
 
 const RightMiddleContainer = styled.div`
- // background-color: #EFEFEF;
   flex-grow: 1;
   width: 100%;
   margin-top: 60px;
@@ -841,7 +828,6 @@ p {
 `;
 
 const MoreWeatherInfo = styled.div`
-//  background-color: green;
   margin-top: 40px;
   margin-bottom: 50px;
   display: flex;
@@ -889,4 +875,8 @@ const GraphContainer = styled.div`
   border: 1px solid lightgray;
 `;
 
+const LinkToOfficialWebsite = styled(Link)`
+  color: #96A7F2;
+  text-decoration: none;
+`;
 
