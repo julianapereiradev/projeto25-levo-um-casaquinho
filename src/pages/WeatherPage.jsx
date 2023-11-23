@@ -182,7 +182,7 @@ export default function WeatherPage() {
             </button>
           </>
         ) : (
-          ""
+          <div style={{ background: "yellow" }}>Nada</div>
         )}
       </div>
 
