@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef} from "react";
 import axios from "axios";
 import Swal from 'sweetalert2'
 import withReactContent from "sweetalert2-react-content";
+import { pages } from "../routes/routes";
+import { useNavigate } from "react-router-dom";
 
 const api = {
     key: import.meta.env.VITE_API_KEY,
@@ -12,6 +14,7 @@ const api = {
 
 export default function WeatherPage() {
 
+    const navigate = useNavigate();
     const [search, setSearch] = useState("");
     const [unit, setUnit] = useState("metric");
     const [weather, setWeather] = useState({});
@@ -120,8 +123,9 @@ export default function WeatherPage() {
       const diaDaSemana = diasDaSemana[data.getDay()];
       const hora = data.getHours();
       const minuto = data.getMinutes();
-  
-      const dataFormatada = `${dia}/${mes}/${ano}, ${diaDaSemana}, ${hora}:${minuto}`;
+      const minutoFormatado = minuto < 10 ? `0${minuto}` : minuto;
+
+      const dataFormatada = `${dia}/${mes}/${ano}, ${diaDaSemana}, ${hora}:${minutoFormatado}`;
       return dataFormatada;
     }
   
@@ -151,9 +155,14 @@ export default function WeatherPage() {
           });
       }
     }
+
+    function goToNextDays() {
+      navigate(pages.forecast)
+    }
     
     return (
         <>
+        <button onClick={goToNextDays}>Próximos dias</button>
       <h1>Levo um casaquinho?</h1>
 
       <input
@@ -161,9 +170,13 @@ export default function WeatherPage() {
         type="text"
         placeholder="Procure por uma cidade"
         onChange={(e) => setSearch(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" ? searchPressed() : ''}
       />
 
-      <button onClick={searchPressed}>BUSCAR</button>
+      <button 
+      onClick={searchPressed}
+      >BUSCAR
+      </button>
 
       {Object.keys(weather).length !== 0 ? (
         <>
