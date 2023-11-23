@@ -110,6 +110,52 @@ export default function  WeatherPage() {
     defineTemperatureColor();
   }, [weather]);
 
+  // ...
+
+// Adicione o estado `unit` como dependência para o useEffect
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      // Cria as duas promessas de requisição
+      const currentWeatherPromise = axios.get(
+        `${api.base}weather?q=${search}&units=${unit}&APPID=${api.key}&lang=pt_br`
+      );
+
+      const forecastPromise = axios.get(
+        `${api.base}forecast?q=${search}&units=${unit}&APPID=${api.key}&lang=pt_br`
+      );
+
+      // Usa Promise.all() para executar ambas as promessas simultaneamente
+      const [currentWeatherResponse, forecastResponse] = await Promise.all([
+        currentWeatherPromise,
+        forecastPromise,
+      ]);
+
+      setWeather(currentWeatherResponse.data);
+      //console.log("resposta.data para changeUnit (atual):", currentWeatherResponse.data);
+
+      // Faça o que você precisa com a resposta do forecast, por exemplo:
+      const temps = forecastResponse.data.list.map((i) => ({
+        time: i.dt,
+        day: dateFormatter(i.dt_txt),
+        temp: i.main.temp
+      }));
+      setTemperatureList(temps);
+      setDataLoaded(true);
+      //console.log('changeUnit temps', temps);
+    } catch (error) {
+      //alert(error.response.data.message);
+      console.log("erro em: Promise.all()", error);
+    }
+  };
+
+  fetchData(); // Chame a função fetchData diretamente
+
+}, [unit]); // Adicione o estado `unit` como dependência
+
+// ...
+
+
   function ModalContent() {
     return <p>A cidade digitada não existe!</p>;
   }
@@ -123,7 +169,7 @@ export default function  WeatherPage() {
     promise
       .then((resposta) => {
         setWeather(resposta.data);
-        console.log("resposta.data for searchPressed:", resposta.data);
+        //console.log("resposta.data for searchPressed:", resposta.data);
         todayWeather()
       })
       .catch((erro) => {
@@ -175,47 +221,11 @@ export default function  WeatherPage() {
   const dataConvertida =
     Object.keys(weather).length !== 0 ? converterTimestamp(weather.dt) : "";
 
-  function changeUnit() {
-    const newUnit = unit === "metric" ? "imperial" : "metric";
-    setUnit(newUnit);
-
-    // Cria as duas promessas de requisição
-  const currentWeatherPromise = axios.get(
-    `${api.base}weather?q=${search}&units=${newUnit}&APPID=${api.key}&lang=pt_br`
-  );
-  
-  const forecastPromise = axios.get(
-    `${api.base}forecast?q=${search}&units=${newUnit}&APPID=${api.key}&lang=pt_br`
-  );
-
-  // Usa Promise.all() para executar ambas as promessas simultaneamente
-  Promise.all([currentWeatherPromise, forecastPromise])
-    .then((responses) => {
-      const currentWeatherResponse = responses[0];
-      const forecastResponse = responses[1];
-
-      setWeather(currentWeatherResponse.data);
-      console.log("resposta.data para changeUnit (atual):", currentWeatherResponse.data);
-
-      // Faça o que você precisa com a resposta do forecast, por exemplo:
-      const temps = forecastResponse.data.list.map((i) => ({
-        time: i.dt,
-        day: dateFormatter(i.dt_txt),
-        temp: i.main.temp
-      }));
-      setTemperatureList(temps);
-      setDataLoaded(true);
-      console.log('changeUnit temps',temps);
-    })
-    .catch((error) => {
-      alert(error.response.data.message);
-      console.log("erro em: Promise.all()", error);
-    });
-  }
-
-  const handleChangeSwitch = (newChecked) => {
-   setChecked(newChecked);
- };
+    const handleChangeSwitch = (newChecked) => {
+      // Ao alterar o switch, atualiza tanto o estado checked quanto a unidade
+      setChecked(newChecked);
+      setUnit(newChecked ? "imperial" : "metric");
+    };
 
  function todayWeather() {
    setSelectedSection("today");
@@ -235,10 +245,12 @@ export default function  WeatherPage() {
     }))
     setTemperatureList(temps)
     setDataLoaded(true)
-    console.log('nextdayWeather temps:',temps)
+    //console.log('nextdayWeather temps:',temps)
   })
   promise.catch((err) => console.log(err.response.data))
  }
+
+ console.log('temperaturelist:', temperatureList)
 
   return (
     <SignUpContainer>
@@ -273,9 +285,7 @@ export default function  WeatherPage() {
             <h5>{dataConvertida.dia}/{dataConvertida.mes}/{dataConvertida.ano}</h5>
             <h5>{dataConvertida.diaDaSemana}, {dataConvertida.hora}:{dataConvertida.minutoFormatado}</h5>
          <LeftBoxInfoUnit>
-         <button onClick={changeUnit}>
-              MUDAR PARA {unit === "metric" ? "F" : "C"}
-            </button>
+        
          <Switch
           checked={checked}
           onChange={handleChangeSwitch}
@@ -388,7 +398,7 @@ export default function  WeatherPage() {
         margin={{ right: 50, left: 50, top: 30, down: 30 }}
       >
         <XAxis dataKey="day" />
-        <YAxis domain={[0, 42]} tickCount={6}/>
+        <YAxis domain={[0, 42]} tickCount={6} dataKey={"temp"} tickFormatter={(value) => `${value} ${unit === "metric" ? "°C" : "°F"}`}/>
         <Tooltip />
         <CartesianGrid stroke="#ffffff" />
         <Line type="monotone" dataKey="temp" stroke="#4c0561" />
