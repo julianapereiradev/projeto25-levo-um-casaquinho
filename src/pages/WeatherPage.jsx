@@ -19,6 +19,7 @@ import {
 import format from 'date-fns-tz/format'
 import ptBR from 'date-fns/locale/pt-BR'
 import weathergif from "../images/weathergif.gif"
+import { CiSearch } from "react-icons/ci";
 
 
 const api = {
@@ -243,10 +244,6 @@ export default function  WeatherPage() {
   promise.catch((err) => console.log(err.response.data))
  }
 
- const formatarData = (data) => {
-  return format(new Date(data), 'dd/MM (eee)', { locale: ptBR });
-}
-
   return (
     <SignUpContainer>
       <SignUpBox>
@@ -255,13 +252,16 @@ export default function  WeatherPage() {
          <img src={coat} alt="coat-icon" width={'20%'}/>
          <h1>Levo um casaquinho?</h1>
          </LeftBoxTitle>
-          <input
-          ref={inputRef}
-          type="text"
-          placeholder="Procure por uma cidade"
-          onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={(e) => (e.key === "Enter" ? searchPressed() : "")}
-        />
+         <SearchContainer>
+  <SearchInput
+    ref={inputRef}
+    type="text"
+    placeholder="Procure por uma cidade"
+    onChange={(e) => setSearch(e.target.value)}
+    onKeyDown={(e) => (e.key === "Enter" ? searchPressed() : "")}
+  />
+  <SearchIcon className="search-icon"/>
+</SearchContainer>
 
 {Object.keys(weather).length !== 0 ? (
           <>
@@ -439,16 +439,7 @@ const LeftBox = styled.div`
   }
 
   input {
-  margin-top: 50px;
-  height: 50px;
-  border: none;
-  border-radius: 8px;
-  background-color: #EDEDEF;
-  color: #424243;
-  font-size: 16px;
-  padding-left: 20px;
-  margin-left: 50px;
-  margin-right: 50px;
+
 }
 `
 
@@ -472,6 +463,39 @@ const LeftBoxTitle = styled.div`
    font-weight: 500;
   }
 `
+
+const SearchContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SearchInput = styled.input`
+  height: 100%;
+  max-height: 50px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background-color: #EDEDEF;
+  color: #424243;
+  font-size: 16px;
+  margin-top: 50px;
+  padding-left: 40px;
+  margin-left: 50px;
+  margin-right: 50px;
+`;
+
+const SearchIcon = styled(CiSearch)`
+  position: absolute;
+  left: 60px;
+  top: 68%;
+  width: 100%;
+  max-width: 22px;
+  height: 100%;
+  max-height: 22px;
+  color: #8B9CAF;
+`;
 
 const LeftBoxTemperature = styled.div`
   display: flex;
@@ -507,6 +531,7 @@ const LeftBoxInfo = styled.div`
 
   h5 {
    margin-bottom: 5px;
+   font-size: 19px;
   }
 
   img {
@@ -623,6 +648,7 @@ const RightBottomText = styled.div`
 const GraphContainer = styled.div`
   background-color: #FFFFFF;
   border: 1px solid lightgray;
+  margin-top: 30px;
 `;
 
 const LinkToOfficialWebsite = styled(Link)`
