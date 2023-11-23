@@ -16,8 +16,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import format from 'date-fns-tz/format'
-import ptBR from 'date-fns/locale/pt-BR'
 import weathergif from "../images/weathergif.gif"
 import { CiSearch } from "react-icons/ci";
 
@@ -44,6 +42,7 @@ export default function  WeatherPage() {
   const MySwal = withReactContent(Swal);
   const [temperatureList, setTemperatureList] = useState([])
   const [dataLoaded, setDataLoaded] = useState(false)
+  const [isTodaySelected, setIsTodaySelected] = useState(true);
 
   const weekday = { 
     0: "dom",
@@ -307,8 +306,22 @@ export default function  WeatherPage() {
 
         <RightBox>
         <RightHeaderButton>
-          <LinkToChangePage onClick={todayWeather}>Hoje</LinkToChangePage>
-          <LinkToChangePage onClick={nextDaysWeather}>Próximos dias</LinkToChangePage>
+          <LinkToChangePage  onClick={() => {
+              todayWeather();
+              setIsTodaySelected(true);
+            }}
+            style={{ color: isTodaySelected ? '#222222' : '#C8C8C8' }}
+            >Hoje
+            </LinkToChangePage>
+          
+          <LinkToChangePage onClick={() => {
+              nextDaysWeather();
+              setIsTodaySelected(false);
+            }}
+            style={{ color: !isTodaySelected ? '#222222' : '#C8C8C8' }}
+            >Próximos dias
+            </LinkToChangePage>
+
         </RightHeaderButton>
 
         <RightMiddleContainer>
@@ -581,6 +594,10 @@ const LinkToChangePage = styled(Link)`
   margin-right: 40px;
   color: #222222;
   text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 
