@@ -297,6 +297,22 @@ export default function  WeatherPage() {
   const [isACityDefined, setIsACityDefined] = useState(false)
   const [dataLoaded, setDataLoaded] = useState(false)
 
+  const weekday = { 
+    0: "dom",
+    1: "seg",
+    2: "ter",
+    3: "qua",
+    4: "qui",
+    5: "sex",
+    6: "sab" 
+};
+
+  function dateFormatter(date) {
+    const testDate = new Date(date);
+    return `${testDate.getDate()}/${testDate.getMonth()+1} (${weekday[testDate.getDay()]})`;
+  }
+
+
   useEffect(() => {
     // Esta função será executada sempre que os dados do clima forem atualizados
     inputRef.current.focus();
@@ -355,6 +371,7 @@ export default function  WeatherPage() {
   }
 
   function searchPressed() {
+
     const promise = axios.get(
       `${api.base}weather?q=${search}&units=${unit}&APPID=${api.key}&lang=pt_br`
     );
@@ -397,9 +414,19 @@ export default function  WeatherPage() {
     const minuto = data.getMinutes();
     const minutoFormatado = minuto < 10 ? `0${minuto}` : minuto;
 
-    const dataFormatada = `${dia}/${mes}/${ano}, ${diaDaSemana}, ${hora}:${minutoFormatado}`;
+    const dataFormatada = {
+      dia,
+      mes,
+      ano,
+      diaDaSemana,
+      hora,
+      minuto,
+      minutoFormatado,
+    };
+  
     return dataFormatada;
   }
+
 
   const dataConvertida =
     Object.keys(weather).length !== 0 ? converterTimestamp(weather.dt) : "";
@@ -408,24 +435,39 @@ export default function  WeatherPage() {
     const newUnit = unit === "metric" ? "imperial" : "metric";
     setUnit(newUnit);
 
-    if (Object.keys(weather).length !== 0) {
-      const promise = axios.get(
-        `${api.base}weather?q=${search}&units=${newUnit}&APPID=${api.key}&lang=pt_br`
-      );
+    // Cria as duas promessas de requisição
+  const currentWeatherPromise = axios.get(
+    `${api.base}weather?q=${search}&units=${newUnit}&APPID=${api.key}&lang=pt_br`
+  );
+  
+  const forecastPromise = axios.get(
+    `${api.base}forecast?q=${search}&units=${newUnit}&APPID=${api.key}&lang=pt_br`
+  );
 
-      promise
-        .then((resposta) => {
-          setWeather(resposta.data);
-          console.log("resposta.data for searchPressed:", resposta.data);
-        })
-        .catch((erro) => {
-          alert(erro.response.data.message);
-          console.log(
-            "erro em: GET para mudar changeunit:",
-            erro
-          );
-        });
-    }
+  // Usa Promise.all() para executar ambas as promessas simultaneamente
+  Promise.all([currentWeatherPromise, forecastPromise])
+    .then((responses) => {
+      const currentWeatherResponse = responses[0];
+      const forecastResponse = responses[1];
+
+      setWeather(currentWeatherResponse.data);
+      console.log("resposta.data para changeUnit (atual):", currentWeatherResponse.data);
+
+      // Faça o que você precisa com a resposta do forecast, por exemplo:
+      const temps = forecastResponse.data.list.map((i) => ({
+        time: i.dt,
+        day: dateFormatter(i.dt_txt),
+        temp: i.main.temp
+      }));
+      setTemperatureList(temps);
+      setIsACityDefined(true);
+      setDataLoaded(true);
+      console.log('changeUnit temps',temps);
+    })
+    .catch((error) => {
+      alert(error.response.data.message);
+      console.log("erro em: Promise.all()", error);
+    });
   }
 
   const handleChangeSwitch = (newChecked) => {
@@ -444,13 +486,14 @@ export default function  WeatherPage() {
 
   promise.then(res => {
     const temps = res.data.list.map((i) => ({
-      time: i.dt_txt,
+      time: i.dt,
+      day: dateFormatter(i.dt_txt),
       temp: i.main.temp
     }))
     setTemperatureList(temps)
     setIsACityDefined(true)
     setDataLoaded(true)
-    console.log(temps)
+    console.log('nextdayWeather temps:',temps)
   })
   promise.catch((err) => console.log(err.response.data))
  }
@@ -458,7 +501,6 @@ export default function  WeatherPage() {
  const formatarData = (data) => {
   return format(new Date(data), 'dd/MM (eee)', { locale: ptBR });
 }
-
 
   return (
     <SignUpContainer>
@@ -487,7 +529,8 @@ export default function  WeatherPage() {
          <LeftBoxInfo>
             <h4>{weather.weather[0].description}</h4>
             <img src={line} width={'80%'} height={'1%'}/>
-            <h5>{dataConvertida}</h5>
+            <h5>{dataConvertida.dia}/{dataConvertida.mes}/{dataConvertida.ano}</h5>
+            <h5>{dataConvertida.diaDaSemana}, {dataConvertida.hora}:{dataConvertida.minutoFormatado}</h5>
          <LeftBoxInfoUnit>
          <button onClick={changeUnit}>
               MUDAR PARA {unit === "metric" ? "F" : "C"}
@@ -568,18 +611,36 @@ export default function  WeatherPage() {
             <>
               <p>Renderizacao de nextDaysWeather </p>
               {dataLoaded && (
-        <div>
-          <ResponsiveContainer width={700} height={400}>
+                <>
+       {/* <GraphContainer>
+          <ResponsiveContainer width={900} height={400}>
             <LineChart data={temperatureList} margin={{ right: 30, left: 30 }}>
-              <CartesianGrid strokeDasharray="3 3" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#bb0808"/>
               <XAxis dataKey="time" tickFormatter={formatarData} />
               <YAxis domain={[0, 42]} tickCount={6} />
               <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="temp" name="Temperatura" stroke="#8884d8" activeDot={{ r: 8 }} />
+              <Line type="monotone" dataKey="temp"/>
             </LineChart>
           </ResponsiveContainer>
-        </div>
+              </GraphContainer> */}
+        <GraphContainer>
+        <LineChart
+        width={900}
+        height={400}
+        data={temperatureList}
+        margin={{ right: 50, left: 50, top: 30, down: 30 }}
+      >
+        <XAxis dataKey="day" />
+        <YAxis domain={[0, 42]} tickCount={6}/>
+        <Tooltip />
+        <CartesianGrid stroke="#ffffff" />
+        <Line type="monotone" dataKey="temp" stroke="#4c0561" />
+      </LineChart>
+          
+        </GraphContainer>
+
+          </>
+
       )}
             </>
           ) : null}
@@ -746,7 +807,7 @@ const RightHeaderButton = styled.div`
 `;
 
 const RightMiddleContainer = styled.div`
-  background-color: #7bff00;
+  background-color: #EFEFEF;
   flex-grow: 1;
   width: 100%;
 `;
@@ -755,6 +816,12 @@ const RightBottomText = styled.div`
   align-self: flex-end;
   width: 100%;
 `;
+
+const GraphContainer = styled.div`
+  background-color: #FFFFFF;
+  border: 1px solid lightgray;
+`;
+
 
 
 
