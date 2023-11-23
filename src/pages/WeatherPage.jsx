@@ -399,7 +399,7 @@ useEffect(() => {
       >
         <XAxis dataKey="day" />
         <YAxis domain={[0, 42]} tickCount={6} dataKey={"temp"} tickFormatter={(value) => `${value} ${unit === "metric" ? "°C" : "°F"}`}/>
-        <Tooltip />
+        <Tooltip formatter={(value) => `${value} ${unit === "metric" ? "°C" : "°F"}`}/>
         <CartesianGrid stroke="#ffffff" />
         <Line type="monotone" dataKey="temp" stroke="#4c0561" />
       </LineChart>  
