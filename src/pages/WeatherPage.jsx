@@ -2,7 +2,6 @@ import styled from "styled-components"
 import coat from "../images/coat.png"
 import line from "../images/line-through.png"
 import Switch from "react-switch";
-
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -31,8 +30,6 @@ export default function  WeatherPage() {
 
   const [checked, setChecked] = useState(false);
   const [selectedSection, setSelectedSection] = useState(null);
-
-
   const [search, setSearch] = useState("");
   const [unit, setUnit] = useState("metric");
   const [weather, setWeather] = useState({});
@@ -423,7 +420,6 @@ const SignUpContainer = styled.div`
 
 const SignUpBox = styled.div`
   width: 100vw;
-
 `
 
 const LeftBox = styled.div`
@@ -450,10 +446,6 @@ const LeftBox = styled.div`
     padding: 10px;
     color: #222222;
   }
-
-  input {
-
-}
 `
 
 const LeftBoxTitle = styled.div`
