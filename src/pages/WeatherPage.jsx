@@ -255,14 +255,11 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { pages } from "../routes/routes";
-import { useNavigate } from "react-router-dom";
+import {Link } from "react-router-dom";
 import {
   CartesianGrid,
-  Legend,
   Line,
   LineChart,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -285,7 +282,6 @@ export default function  WeatherPage() {
   const [selectedSection, setSelectedSection] = useState(null);
 
 
-  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [unit, setUnit] = useState("metric");
   const [weather, setWeather] = useState({});
@@ -294,7 +290,6 @@ export default function  WeatherPage() {
   const inputRef = useRef(null);
   const MySwal = withReactContent(Swal);
   const [temperatureList, setTemperatureList] = useState([])
-  const [isACityDefined, setIsACityDefined] = useState(false)
   const [dataLoaded, setDataLoaded] = useState(false)
 
   const weekday = { 
@@ -460,7 +455,6 @@ export default function  WeatherPage() {
         temp: i.main.temp
       }));
       setTemperatureList(temps);
-      setIsACityDefined(true);
       setDataLoaded(true);
       console.log('changeUnit temps',temps);
     })
@@ -491,7 +485,6 @@ export default function  WeatherPage() {
       temp: i.main.temp
     }))
     setTemperatureList(temps)
-    setIsACityDefined(true)
     setDataLoaded(true)
     console.log('nextdayWeather temps:',temps)
   })
@@ -562,39 +555,52 @@ export default function  WeatherPage() {
 
         <RightBox>
         <RightHeaderButton>
-          <button onClick={todayWeather}>Hoje</button>
-          <button onClick={nextDaysWeather}>Próximos dias</button>
+          <LinkToChangePage onClick={todayWeather}>Hoje</LinkToChangePage>
+          <LinkToChangePage onClick={nextDaysWeather}>Próximos dias</LinkToChangePage>
         </RightHeaderButton>
 
         <RightMiddleContainer>
+        <ContainerTitle>
+          <h1>{weather.name}</h1>
+          {Object.keys(weather).length !== 0 ? (<>
+            <div style={{display:'flex', flexDirection:'row', gap:'20px'}}>
+            <p>Lat: {weather.coord.lat.toFixed(2)}</p>
+            <p>Long: {weather.coord.lon.toFixed(2)}</p>
+          </div>
+          </>):('nadaaaa')
+          }
+
+          </ContainerTitle>
           {selectedSection === "today" ? (
             <>
-              <p>Renderizacao de todaysWeather </p>
               {Object.keys(weather).length !== 0 ? (
           <>
-            <p>Nome: {weather.name}</p>
+          <MoreWeatherInfo>
+          <div>
+            <p>Mínima</p>
+              <h2>{Math.round(weather.main.temp_min)}
+              {unit === "metric" ? "°C" : "°F"}</h2>
+            </div>
 
-            <p>Lat: {weather.coord.lat.toFixed(2)}</p>
+            <div>
+            <p>Máxima</p>
+              <h2>{Math.round(weather.main.temp_max)}
+              {unit === "metric" ? "°C" : "°F"}</h2>
+            </div>
 
-            <p>Lon: {weather.coord.lon.toFixed(2)}</p>
+            <div>
+            <p>Umidade</p>
+              <h2>{weather.main.humidity}%</h2>
+            </div>
 
-            <p>
-              Mínima: {Math.round(weather.main.temp_min)}{" "}
-              {unit === "metric" ? "°C" : "°F"}
-            </p>
-
-            <p>
-              Máxima: {Math.round(weather.main.temp_max)}{" "}
-              {unit === "metric" ? "°C" : "°F"}
-            </p>
-
-            <p>Umidade: {weather.main.humidity}%</p>
-
-            <p>
-              Velocidade do vento: {weather.wind.speed}{" "}
-              {unit === "metric" ? "m/s" : "milhas/hora"}
-            </p>
-
+            <div>
+            <p>Velocidade do vento</p>
+              <h2>{weather.wind.speed}{" "}
+              {unit === "metric" ? "m/s" : "mi/h"}</h2>
+            </div>
+            </MoreWeatherInfo>       
+            
+            <UseOrNotUseCoat>
             {unit === "metric"
               ? weather.main.temp_min < 17 || weather.main.temp_max < 17
                 ? "Você deve levar um casaquinho!"
@@ -602,6 +608,7 @@ export default function  WeatherPage() {
               : weather.main.temp_min < 62.6 || weather.main.temp_max < 62.6
               ? "Você deve levar um casaquinho!"
               : "Não, você não deve levar um casaquinho!"}
+            </UseOrNotUseCoat>
           </>
         ) : (
           <div style={{ background: "green" }}>Nada</div>
@@ -801,15 +808,75 @@ const RightBox = styled.div`
 `;
 
 const RightHeaderButton = styled.div`
-  background-color: red;
   align-self: flex-start;
   width: 100%;
 `;
 
+const LinkToChangePage = styled(Link)`
+  align-self: center;
+  font-size: 40px;
+  margin-right: 40px;
+  color: #222222;
+  text-decoration: none;
+`;
+
+
 const RightMiddleContainer = styled.div`
-  background-color: #EFEFEF;
+ // background-color: #EFEFEF;
   flex-grow: 1;
   width: 100%;
+  margin-top: 60px;
+`;
+
+const ContainerTitle = styled.div`
+
+h1 {
+font-size: 100px
+}
+
+p {
+  font-size: 22px;
+  margin-top: 30px;
+}
+`;
+
+const MoreWeatherInfo = styled.div`
+//  background-color: green;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  display: flex;
+    flex-wrap: wrap;
+
+  div {
+    background-color: #4D4494;
+    width: 100%;
+    height: 100%;
+    max-width: 350px;
+    max-height: 180px;
+    padding: 30px;
+    border-radius: 30px;
+    margin-bottom: 30px;
+    margin-right: 80px;
+  }
+
+  p {
+    font-size: 22px;
+    color: #FFFFFF;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  h2 {
+    font-size: 40px;
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+`;
+
+const UseOrNotUseCoat = styled.div`
+  font-size: 22px;
+  font-style: italic;
+  color: #AFADAD;
 `;
 
 const RightBottomText = styled.div`
@@ -821,7 +888,5 @@ const GraphContainer = styled.div`
   background-color: #FFFFFF;
   border: 1px solid lightgray;
 `;
-
-
 
 
