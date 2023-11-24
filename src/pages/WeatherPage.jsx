@@ -6,7 +6,7 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   CartesianGrid,
   Line,
@@ -114,42 +114,45 @@ export default function  WeatherPage() {
 
 // Adicione o estado `unit` como dependência para o useEffect
 useEffect(() => {
-  const fetchData = async () => {
-    try {
-      // Cria as duas promessas de requisição
-      const currentWeatherPromise = axios.get(
-        `${api.base}weather?q=${search}&units=${unit}&APPID=${api.key}&lang=pt_br`
-      );
-
-      const forecastPromise = axios.get(
-        `${api.base}forecast?q=${search}&units=${unit}&APPID=${api.key}&lang=pt_br`
-      );
-
-      // Usa Promise.all() para executar ambas as promessas simultaneamente
-      const [currentWeatherResponse, forecastResponse] = await Promise.all([
-        currentWeatherPromise,
-        forecastPromise,
-      ]);
-
-      setWeather(currentWeatherResponse.data);
-      //console.log("resposta.data para changeUnit (atual):", currentWeatherResponse.data);
-
-      // Faça o que você precisa com a resposta do forecast, por exemplo:
-      const temps = forecastResponse.data.list.map((i) => ({
-        time: i.dt,
-        day: dateFormatter(i.dt_txt),
-        temp: i.main.temp
-      }));
-      setTemperatureList(temps);
-      setDataLoaded(true);
-      //console.log('changeUnit temps', temps);
-    } catch (error) {
-      //alert(error.response.data.message);
-      console.log("erro em: Promise.all()", error);
-    }
-  };
-
-  fetchData(); // Chame a função fetchData diretamente
+  if(search) {
+    const fetchData = async () => {
+      try {
+        // Cria as duas promessas de requisição
+        const currentWeatherPromise = axios.get(
+          `${api.base}weather?q=${search}&units=${unit}&APPID=${api.key}&lang=pt_br`
+        );
+  
+        const forecastPromise = axios.get(
+          `${api.base}forecast?q=${search}&units=${unit}&APPID=${api.key}&lang=pt_br`
+        );
+  
+        // Usa Promise.all() para executar ambas as promessas simultaneamente
+        const [currentWeatherResponse, forecastResponse] = await Promise.all([
+          currentWeatherPromise,
+          forecastPromise,
+        ]);
+  
+        setWeather(currentWeatherResponse.data);
+        //console.log("resposta.data para changeUnit (atual):", currentWeatherResponse.data);
+  
+        // Faça o que você precisa com a resposta do forecast, por exemplo:
+        const temps = forecastResponse.data.list.map((i) => ({
+          time: i.dt,
+          day: dateFormatter(i.dt_txt),
+          temp: i.main.temp
+        }));
+        setTemperatureList(temps);
+        setDataLoaded(true);
+        //console.log('changeUnit temps', temps);
+      } catch (error) {
+        //alert(error.response.data.message);
+        console.log("erro em: Promise.all()", error);
+      }
+    };
+  
+    fetchData(); // Chame a função fetchData diretamente
+  }
+  
 
 }, [unit]); // Adicione o estado `unit` como dependência
 
@@ -223,6 +226,7 @@ useEffect(() => {
 
     const handleChangeSwitch = (newChecked) => {
       // Ao alterar o switch, atualiza tanto o estado checked quanto a unidade
+      console.log("o que esta chegando no handlechangeswitch", newChecked)
       setChecked(newChecked);
       setUnit(newChecked ? "imperial" : "metric");
     };
