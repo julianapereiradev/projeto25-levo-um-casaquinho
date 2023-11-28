@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import { pages } from "./routes/routes";
-import WeatherPage from "./pages/WeatherPage";
+import TakeACoatPage from "./pages/TakeACoatPage";
 import ErrorPage from "./pages/ErrorPage";
 
 export default function App() {
@@ -9,7 +9,7 @@ export default function App() {
     <PagesContainer>
       <BrowserRouter>
         <Routes>
-          <Route path={pages.weather} element={<WeatherPage />} />
+          <Route path={pages.weather} element={<TakeACoatPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>

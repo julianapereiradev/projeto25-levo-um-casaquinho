@@ -24,17 +24,17 @@ const api = {
   iconBase: "https://openweathermap.org/img/wn/",
 };
 
-export default function WeatherPage() {
+export default function TakeACoatPage() {
   const [checked, setChecked] = useState(false);
   const [selectedSection, setSelectedSection] = useState(null);
-  const [search, setSearch] = useState("");
-  const [unit, setUnit] = useState("metric");
-  const [weather, setWeather] = useState({});
+  const [search, setSearch] = useState(""); //
+  const [unit, setUnit] = useState("metric"); //
+  const [weather, setWeather] = useState({}); //
   const [imageWeather, setImageWeather] = useState("");
   const [temperatureColor, setTemperatureColor] = useState("");
   const inputRef = useRef(null);
   const MySwal = withReactContent(Swal);
-  const [temperatureList, setTemperatureList] = useState([]);
+  const [temperatureList, setTemperatureList] = useState([]); //
   const [dataLoaded, setDataLoaded] = useState(false);
   const [isTodaySelected, setIsTodaySelected] = useState(true);
 
