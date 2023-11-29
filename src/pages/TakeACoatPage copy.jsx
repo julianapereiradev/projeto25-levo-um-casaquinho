@@ -263,6 +263,7 @@ export default function TakeACoatPage() {
 
               <LeftBoxInfo>
                 <h4>{weather.weather[0].description}</h4>
+                
                 <img src={line} width={"80%"} height={"1%"} />
                 <h5>
                   {dataConvertida.dia}/{dataConvertida.mes}/{dataConvertida.ano}

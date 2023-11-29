@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import coat from "../images/coat.png";
+import Search from "./GeneralInfo/Search";
+import CurrentTemp from "./GeneralInfo/CurrentTemp";
+import Datetime from "./GeneralInfo/Datetime";
+import SwitchButton from "./GeneralInfo/SwitchButton";
 
 export default function GeneralWeatherInfo(props) {
   const { setSearch, unit, setUnit, temp, weatherZeroMain, description, icon } =
@@ -15,13 +19,20 @@ export default function GeneralWeatherInfo(props) {
         </LeftHeaderBox>
 
         <LeftMiddleBox>
-          <h2>Componente Input de Pesquisa</h2>
-          <h3>Componente com  outras infos</h3>
+          <Search setSearch={setSearch}/>
+          <CurrentTemp 
+          unit={unit}
+          setUnit={setUnit}
+          temp={temp}
+          weatherZeroMain={weatherZeroMain}
+          description={description}
+          icon={icon}
+          />
 
           <SeparateLine />
 
-          <h4>Componente do dia/horário</h4>
-          <button>Componente Button Switch</button>
+          <Datetime />
+         <SwitchButton />
         </LeftMiddleBox>
 
         <LeftBottomBox>
@@ -51,7 +62,6 @@ const LeftHeaderBox = styled.div`
   color: #222222;
   display: flex;
   align-items: center;
-  margin-bottom: 40px;
   //background-color: yellow;
   width: 100%;
   
@@ -71,16 +81,17 @@ const LeftMiddleBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  //background-color: pink;
+  background-color: pink;
   margin-bottom: 40px;
   width: 100%;
   height: 100%;
 `;
 
 const SeparateLine = styled.div`
-  width: 90%;
+  width: 70%;
   height: 2px;
   background: #EDEDED;
+  margin: 20px 0px 20px 0px;
 `;
 
 const LeftBottomBox = styled.div`
