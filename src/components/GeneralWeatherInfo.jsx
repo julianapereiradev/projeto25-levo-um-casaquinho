@@ -6,7 +6,7 @@ import Datetime from "./GeneralInfo/Datetime";
 import SwitchButton from "./GeneralInfo/SwitchButton";
 
 export default function GeneralWeatherInfo(props) {
-  const { setSearch, unit, setUnit, temp, weatherZeroMain, description, icon } =
+  const { setSearch, unit, setUnit, temp, weatherZeroMain, description, icon, dt } =
     props;
 
   return (
@@ -31,7 +31,9 @@ export default function GeneralWeatherInfo(props) {
 
           <SeparateLine />
 
-          <Datetime />
+          <Datetime 
+          dt={dt}
+          />
          <SwitchButton />
         </LeftMiddleBox>
 

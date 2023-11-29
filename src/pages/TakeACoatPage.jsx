@@ -76,13 +76,13 @@ export default function TakeACoatPage() {
         weatherZeroMain={weather[0].main}
         description={description}
         icon={icon}
+        dt={dt}
        />
        
        <DetailedWeatherInfo 
         temp_min={temp_min}
         temp_max={temp_max}
         humidity={humidity}
-        dt={dt}
         wind={wind}
         name={name}
         coord={coord}
