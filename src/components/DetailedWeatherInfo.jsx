@@ -34,9 +34,9 @@ export default function DetailedWeatherInfo(props) {
           <h5>Componente do Gráfico</h5>
         </RightMiddleBox>
 
-        <RightBottomBox>
+       <RightBottomBox>
           <p>Dados fornecidos pela <span>Open Weather API</span></p>
-        </RightBottomBox>
+  </RightBottomBox>
 
       </RightBox>
     </RightContainer>
@@ -45,8 +45,9 @@ export default function DetailedWeatherInfo(props) {
 
 const RightContainer = styled.div`
   width: 65%;
-  padding: 15px 20px 5px 20px;
+ padding: 15px 20px 0px 20px;
   background-color: #EDEDED;
+  height: 100vh;
 `;
 
 const RightBox = styled.div`
@@ -91,6 +92,6 @@ const RightMiddleBox = styled.div`
 const RightBottomBox = styled.div`
   color: #222222;
   position: absolute;
-  bottom: 0%;
+  bottom: 1%;
   //background-color: #a6ff00;
 `;

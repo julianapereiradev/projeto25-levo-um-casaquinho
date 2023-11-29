@@ -71,7 +71,7 @@ export default function TakeACoatPage() {
        <GeneralWeatherInfo
         setSearch={setSearch}
         unit={unit}
-        setUnit={unit}
+        setUnit={setUnit}
         temp={temp}
         weatherZeroMain={weather[0].main}
         description={description}
@@ -96,8 +96,7 @@ export default function TakeACoatPage() {
 }
 
 const TakeACoatStyle = styled.div`
-  background-color: #ffffff;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
 `;

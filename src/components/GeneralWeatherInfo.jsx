@@ -34,7 +34,10 @@ export default function GeneralWeatherInfo(props) {
           <Datetime 
           dt={dt}
           />
-         <SwitchButton />
+         <SwitchButton
+          unit={unit}
+          setUnit={setUnit}
+         />
         </LeftMiddleBox>
 
         <LeftBottomBox>
@@ -48,8 +51,9 @@ export default function GeneralWeatherInfo(props) {
 
 const LeftContainer = styled.div`
   width: 35%;
-  padding: 15px 20px 5px 20px;
+  padding: 15px 20px 0px 20px;
   background-color: #FFFFFF;
+  height: 100vh;
 `;
 
 const LeftBox = styled.div`
@@ -83,7 +87,6 @@ const LeftMiddleBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: pink;
   margin-bottom: 40px;
   width: 100%;
   height: 100%;
@@ -93,12 +96,11 @@ const SeparateLine = styled.div`
   width: 70%;
   height: 2px;
   background: #EDEDED;
-  margin: 20px 0px 20px 0px;
+  margin: 20px 0px 30px 0px;
 `;
 
 const LeftBottomBox = styled.div`
   color: #222222;
   position: absolute;
-  bottom: 0%;
-  //background-color: #a6ff00;
+  bottom: 1%;
 `;
