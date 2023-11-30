@@ -58,7 +58,6 @@ export default function TakeACoatPage() {
     return <Loading />
   }
 
-  //Destructuring weather and forecast properties:
   const { coord, dt, main, name, weather, wind } = weatherApi;
   const { temp, temp_min, temp_max, humidity } = main;
   const { description, icon } = weather[0];

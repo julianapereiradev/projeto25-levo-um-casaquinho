@@ -10,8 +10,6 @@ export default function DetailedWeatherInfo(props) {
 
   const [isTodaySelected, setIsTodaySelected] = useState(true);
 
-  console.log("isTodaySelected", isTodaySelected);
-
   return (
     <RightContainer>
       <RightBox>
