@@ -6,6 +6,8 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  ComposedChart,
+  ResponsiveContainer
 } from "recharts";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
@@ -24,33 +26,44 @@ export default function ForecastGraphInfo(props) {
 
 
 
-  return (
-      <GraphContainer>
-        <LineChart
-          width={800}
-          height={400}
-          data={temps}
-          margin={{top: 30, right: 50,}}
-        >
-          <XAxis 
-          dataKey="day"
-          fontSize={12}
-          />
-          <YAxis
-           fontSize={12}
-            dataKey="temp"
-            tickFormatter={(value) =>
-              `${value} ${unit === "metric" ? "°C" : "°F"}`
-            }
-          />
-          <Tooltip
-            contentStyle={{backgroundColor: '#EFEFEF'}}
-            formatter={(value) => `${value} ${unit === "metric" ? "°C" : "°F"}`}
-          />
-          <CartesianGrid stroke="#ffffff" />
-          <Line type="monotone" dataKey="temp" stroke="#4c0561" />
-        </LineChart>
-      </GraphContainer>
+  return (        
+          <div style={{ width: "100%", height: 300, backgroundColor: 'white'}}>
+          <ResponsiveContainer>
+            <ComposedChart
+              width={500}
+              height={400}
+              data={temps}
+              margin={{
+                top: 20,
+                right: 20,
+                bottom: 20,
+                left: 0
+              }}
+            >
+              <CartesianGrid stroke="#f5f5f5" />
+              <XAxis
+              fontSize={11} 
+              dataKey="day"
+              />
+              <YAxis 
+              fontSize={11}
+              dataKey="temp"
+              tickFormatter={(value) =>
+                `${value} ${unit === "metric" ? "°C" : "°F"}`
+              }
+              />
+              <Tooltip 
+               formatter={(value) => `${value} ${unit === "metric" ? "°C" : "°F"}`}
+              />
+              <Line 
+              type="monotone" 
+              dataKey="temp"  
+              stroke="#4c0561"  
+              />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
+        
   );
 }
 
