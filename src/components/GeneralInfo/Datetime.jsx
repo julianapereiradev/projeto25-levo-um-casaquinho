@@ -31,5 +31,9 @@ const DatetimeBox = styled.div`
     @media (min-width: 600px) and (max-width: 1023px) {
       font-size: 1.8vw;
   }
+
+  @media (max-width: 599px) {
+    font-size: 3.2vw;
+    }
   }
 `;

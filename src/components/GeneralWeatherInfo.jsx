@@ -82,6 +82,10 @@ const LeftHeaderBox = styled.div`
     @media (min-width: 600px) and (max-width: 1023px) {
     width: 8vw;
     }
+
+    @media (max-width: 599px) {
+    width: 15vw;
+    }
   }
 
   h1 {
@@ -91,6 +95,10 @@ const LeftHeaderBox = styled.div`
 
     @media (min-width: 600px) and (max-width: 1023px) {
       font-size: 5vw;
+    }
+
+    @media (max-width: 599px) {
+      font-size: 8vw;
     }
   }
 
@@ -124,7 +132,13 @@ p {
 
   @media (min-width: 600px) and (max-width: 1023px) {
     font-size: 1.2vw;
+    margin-bottom: 2px;
   }
+
+  @media (max-width: 599px) {
+      font-size: 2vw;
+    margin-bottom: 2px;
+    }
 }
 
 

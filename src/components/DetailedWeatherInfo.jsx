@@ -113,17 +113,6 @@ const RightHeaderBox = styled.div`
   margin-bottom: 40px;
   //background-color: yellow;
   width: 100%;
-
-  img {
-    width: 20%;
-    margin-right: 20px;
-  }
-
-  h1 {
-    font-family: "Poppins", sans-serif;
-    font-size: 3vw;
-    font-weight: 600;
-  }
 `;
 
 const LinkToChangePage = styled(Link)`
@@ -132,6 +121,10 @@ const LinkToChangePage = styled(Link)`
   margin-right: 40px;
   color: #222222;
   text-decoration: none;
+  
+  @media (max-width: 599px) {
+    font-size: 6vw;
+    }
 
   &:hover {
     text-decoration: underline;
@@ -150,6 +143,10 @@ const RightMiddleBox = styled.div`
 const ContainerTitle = styled.div`
   h1 {
     font-size: 7.2vw;
+
+    @media (max-width: 599px) {
+    font-size: 12vw;
+    }
   }
 
   div {
@@ -166,6 +163,10 @@ const ContainerTitle = styled.div`
     @media (min-width: 600px) and (max-width: 1023px) {
     font-size: 1.3vw;
   }
+
+  @media (max-width: 599px) {
+    font-size: 3.5vw;
+    }
   }
 `;
 
@@ -182,7 +183,13 @@ const RightBottomBox = styled.div`
 
     @media (min-width: 600px) and (max-width: 1023px) {
     font-size: 1.2vw;
+    margin-bottom: 2px;
   }
+
+  @media (max-width: 599px) {
+      font-size: 2vw;
+      margin-bottom: 2px;
+    }
   }
 `;
 

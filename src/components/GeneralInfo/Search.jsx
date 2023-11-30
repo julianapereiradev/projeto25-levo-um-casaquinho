@@ -10,36 +10,34 @@ export default function Search(props) {
   });
   const inputRef = useRef(null);
 
-
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
   function handleInputChange(e) {
-    const newFormStates = {...formState}
+    const newFormStates = { ...formState };
     newFormStates[e.target.id] = e.target.value;
-    setFormState(newFormStates)
+    setFormState(newFormStates);
   }
 
   function submitForm(e) {
     e.preventDefault();
-    setSearch(formState.city)
+    setSearch(formState.city);
   }
-
 
   return (
     <div>
-    <SearchContainer onSubmit={(e) => submitForm(e)}>
-      <SearchInput
-        ref={inputRef}
-        type="text"
-        placeholder="Procure por uma cidade"
-        id="city"
-        value={formState.city}
-        onChange={(e) => handleInputChange(e)}
-      />
-      <SearchIcon className="search-icon" />
-    </SearchContainer>
+      <SearchContainer onSubmit={(e) => submitForm(e)}>
+        <SearchInput
+          ref={inputRef}
+          type="text"
+          placeholder="Procure por uma cidade"
+          id="city"
+          value={formState.city}
+          onChange={(e) => handleInputChange(e)}
+        />
+        <SearchIcon className="search-icon" />
+      </SearchContainer>
     </div>
   );
 }
@@ -69,10 +67,14 @@ const SearchInput = styled.input`
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
   @media (min-width: 600px) and (max-width: 1023px) {
-      font-size: 1.8vw;
-      min-width: 100%;
-      padding-left: 40px;
-    }
+    font-size: 1.8vw;
+    min-width: 100%;
+    padding-left: 40px;
+  }
+
+  @media (max-width: 599px) {
+    font-size: 3.8vw;
+  }
 
   &::placeholder {
     color: #424243;
@@ -81,20 +83,34 @@ const SearchInput = styled.input`
     @media (min-width: 600px) and (max-width: 1023px) {
       font-size: 1.8vw;
     }
+
+    @media (max-width: 599px) {
+      font-size: 3.8vw;
+    }
   }
 `;
 
 const SearchIcon = styled(CiSearch)`
   position: absolute;
   left: 30px;
-  top: 64%;
+  top: 60%;
   width: 100%;
-  max-width: 2vw;
+  max-width: 1.7vw;
   height: 100%;
-  max-height: 22px;
+  max-height: 30px;
   color: #8b9caf;
 
   @media (min-width: 600px) and (max-width: 1023px) {
     left: 10px;
-    }
+    top: 65%;
+    max-width: 1.9vw;
+    max-height: 22px;
+  }
+
+  @media (max-width: 599px) {
+    left: 30px;
+    top: 65%;
+    max-width: 4.2vw;
+    max-height: 22px;
+  }
 `;

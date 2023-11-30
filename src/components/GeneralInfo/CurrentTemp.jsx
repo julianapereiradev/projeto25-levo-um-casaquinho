@@ -76,6 +76,10 @@ const LeftBoxTemperature = styled.div`
     @media (min-width: 600px) and (max-width: 1023px) {
       font-size: 2.8vw;
   }
+
+  @media (max-width: 599px) {
+    font-size: 6vw;
+    }
   }
 `;
 
@@ -91,6 +95,10 @@ const LeftRowPart = styled.div`
     @media (min-width: 600px) and (max-width: 1023px) {
       width: 12vw;
   }
+
+  @media (max-width: 599px) {
+    width: 20vw;
+    }
   }
 `;
 
@@ -105,6 +113,10 @@ const InternTempPart = styled.div`
     @media (min-width: 600px) and (max-width: 1023px) {
       font-size: 12vw;
   }
+
+  @media (max-width: 599px) {
+    font-size: 20vw;
+    }
   }
 
   p {
@@ -113,5 +125,9 @@ const InternTempPart = styled.div`
     @media (min-width: 600px) and (max-width: 1023px) {
       font-size: 6.5vw;
   }
+
+  @media (max-width: 599px) {
+    font-size: 10vw;
+    }
   }
 `;

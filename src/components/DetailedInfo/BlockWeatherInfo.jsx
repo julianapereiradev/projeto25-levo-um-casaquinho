@@ -66,7 +66,7 @@ const {
 
   const MoreWeatherInfo = styled.div`
   margin-top: 40px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   display: flex;
   flex-wrap: wrap;
 
@@ -85,6 +85,12 @@ const {
     max-width: 30vw;
     max-height: 10vw;
   }
+
+  @media (max-width: 599px) {
+    max-width: 70vw;
+    max-height: 50vw;
+    padding: 4vw;
+    }
   }
 
   p {
@@ -96,6 +102,10 @@ const {
     @media (min-width: 600px) and (max-width: 1023px) {
       font-size: 2vw;
   }
+
+  @media (max-width: 599px) {
+    font-size: 4vw;
+    }
   }
 
   h2 {
@@ -106,6 +116,10 @@ const {
     @media (min-width: 600px) and (max-width: 1023px) {
       font-size: 3vw;
   }
+
+  @media (max-width: 599px) {
+    font-size: 8vw;
+    }
   }
 `;
 
@@ -117,4 +131,8 @@ const UseOrNotUseCoat = styled.div`
   @media (min-width: 600px) and (max-width: 1023px) {
     font-size: 1.7vw;
   }
+
+  @media (max-width: 599px) {
+    font-size: 4vw;
+    }
 `;
