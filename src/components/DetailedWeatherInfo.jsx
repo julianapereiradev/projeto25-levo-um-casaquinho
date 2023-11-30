@@ -79,13 +79,7 @@ console.log('isTodaySelected', isTodaySelected)
 
         <RightBottomBox>
            <h6>
-              Dados fornecidos pela{" "}
-              <LinkToOfficialWebsite
-                target="_blank"
-                to={"https://openweathermap.org/"}
-              >
-                Open Weather API
-              </LinkToOfficialWebsite>
+              Dados fornecidos pela <LinkToOfficialWebsite target="_blank" to={"https://openweathermap.org/"}>Open Weather API</LinkToOfficialWebsite>
             </h6>
         </RightBottomBox>
       </RightBox>
@@ -97,7 +91,7 @@ const RightContainer = styled.div`
   width: 100%;
   background-color: #ededed;
   padding: 15px 20px 0px 20px;
-  
+
 @media (min-width: 1024px) {
   width: 65%;
   background-color: #ededed;
@@ -167,17 +161,28 @@ const ContainerTitle = styled.div`
   p {
     font-size: 1vw;
     margin-top: 20px;
+    margin-bottom: 20px;
+
+    @media (min-width: 600px) and (max-width: 1023px) {
+    font-size: 1.3vw;
+  }
   }
 `;
 
 const RightBottomBox = styled.div`
+
+  @media (min-width: 1024px) {
   color: #222222;
   position: absolute;
   bottom: 1%;
-  //background-color: #a6ff00;
+  }
 
   h6 {
     font-size: 1vw;
+
+    @media (min-width: 600px) and (max-width: 1023px) {
+    font-size: 1.2vw;
+  }
   }
 `;
 

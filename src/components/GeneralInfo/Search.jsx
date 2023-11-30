@@ -60,7 +60,7 @@ const SearchInput = styled.input`
   border-radius: 15px;
   background-color: #ededef;
   color: #434242;
-  font-size: 16px;
+  font-size: 1.1vw;
   margin-top: 50px;
   padding-left: 40px;
   margin-left: 50px;
@@ -68,9 +68,19 @@ const SearchInput = styled.input`
   outline: 0;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
+  @media (min-width: 600px) and (max-width: 1023px) {
+      font-size: 1.8vw;
+      min-width: 100%;
+      padding-left: 40px;
+    }
+
   &::placeholder {
     color: #424243;
     font-size: 1.1vw;
+
+    @media (min-width: 600px) and (max-width: 1023px) {
+      font-size: 1.8vw;
+    }
   }
 `;
 
@@ -83,4 +93,8 @@ const SearchIcon = styled(CiSearch)`
   height: 100%;
   max-height: 22px;
   color: #8b9caf;
+
+  @media (min-width: 600px) and (max-width: 1023px) {
+    left: 10px;
+    }
 `;

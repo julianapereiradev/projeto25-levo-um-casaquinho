@@ -47,5 +47,9 @@ export default function SwitchButton(props) {
   p {
     font-size: 1.0vw;
     padding-left: 20px;
+
+    @media (min-width: 600px) and (max-width: 1023px) {
+    font-size: 1.8vw;
+  }
   }
 `;

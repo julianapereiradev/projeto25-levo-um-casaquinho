@@ -72,6 +72,10 @@ const LeftBoxTemperature = styled.div`
     font-size: 2vw;
     margin-top: 20px;
     font-family: "Poppins", sans-serif;
+
+    @media (min-width: 600px) and (max-width: 1023px) {
+      font-size: 2.8vw;
+  }
   }
 `;
 
@@ -83,6 +87,10 @@ const LeftRowPart = styled.div`
 
   img {
     width: 8vw;
+
+    @media (min-width: 600px) and (max-width: 1023px) {
+      width: 12vw;
+  }
   }
 `;
 
@@ -93,9 +101,17 @@ const InternTempPart = styled.div`
   h3 {
     font-size: 8vw;
     font-family: "Poppins", sans-serif;
+
+    @media (min-width: 600px) and (max-width: 1023px) {
+      font-size: 12vw;
+  }
   }
 
   p {
     font-size: 4.5vw;
+
+    @media (min-width: 600px) and (max-width: 1023px) {
+      font-size: 6.5vw;
+  }
   }
 `;

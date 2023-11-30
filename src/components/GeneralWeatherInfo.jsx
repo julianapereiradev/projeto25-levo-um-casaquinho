@@ -52,7 +52,7 @@ export default function GeneralWeatherInfo(props) {
 const LeftContainer = styled.div`
   width: 100%;
   padding: 15px 20px 0px 20px;
-  
+
 @media (min-width: 1024px) {
   width: 35%;
   background-color: #FFFFFF;
@@ -78,13 +78,22 @@ const LeftHeaderBox = styled.div`
   img {
     width: 6vw;
     margin-right: 20px;
+
+    @media (min-width: 600px) and (max-width: 1023px) {
+    width: 8vw;
+    }
   }
 
   h1 {
     font-family: 'Poppins', sans-serif;
     font-size: 3vw;
     font-weight: 600;
+
+    @media (min-width: 600px) and (max-width: 1023px) {
+      font-size: 5vw;
+    }
   }
+
 `;
 
 const LeftMiddleBox = styled.div`
@@ -104,7 +113,19 @@ const SeparateLine = styled.div`
 `;
 
 const LeftBottomBox = styled.div`
+  @media (min-width: 1024px) {
   color: #222222;
   position: absolute;
   bottom: 1%;
+}
+
+p {
+  font-size: 1vw;
+
+  @media (min-width: 600px) and (max-width: 1023px) {
+    font-size: 1.2vw;
+  }
+}
+
+
 `;

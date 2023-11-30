@@ -79,18 +79,11 @@ const {
     border-radius: 30px;
     margin-bottom: 30px;
     margin-right: 80px;
-    //background-color: #4d4494;
-
-    @media (max-width: 767px) {
-    background-color: red;
-  }
-
-  @media (min-width: 768px) and (max-width: 1023px) {
-    background-color: green;
-  }
-
-  @media (min-width: 1024px) {
     background-color: #4d4494;
+
+  @media (min-width: 600px) and (max-width: 1023px) {
+    max-width: 30vw;
+    max-height: 10vw;
   }
   }
 
@@ -99,12 +92,20 @@ const {
     color: #ffffff;
     font-weight: 600;
     margin-bottom: 8px;
+
+    @media (min-width: 600px) and (max-width: 1023px) {
+      font-size: 2vw;
+  }
   }
 
   h2 {
     font-size: 2vw;
     color: #ffffff;
     font-weight: 600;
+
+    @media (min-width: 600px) and (max-width: 1023px) {
+      font-size: 3vw;
+  }
   }
 `;
 
@@ -112,4 +113,8 @@ const UseOrNotUseCoat = styled.div`
   font-size: 1vw;
   font-style: italic;
   color: #afadad;
+
+  @media (min-width: 600px) and (max-width: 1023px) {
+    font-size: 1.7vw;
+  }
 `;
