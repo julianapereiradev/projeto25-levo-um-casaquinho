@@ -50,10 +50,14 @@ export default function GeneralWeatherInfo(props) {
 }
 
 const LeftContainer = styled.div`
-  width: 35%;
+  width: 100%;
   padding: 15px 20px 0px 20px;
+  
+@media (min-width: 1024px) {
+  width: 35%;
   background-color: #FFFFFF;
   height: 100vh;
+}
 `;
 
 const LeftBox = styled.div`
@@ -72,7 +76,7 @@ const LeftHeaderBox = styled.div`
   width: 100%;
   
   img {
-    width: 20%;
+    width: 6vw;
     margin-right: 20px;
   }
 

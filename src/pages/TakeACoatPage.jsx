@@ -102,7 +102,11 @@ export default function TakeACoatPage() {
 }
 
 const TakeACoatStyle = styled.div`
-   width: 100vw;
-    height: 100vh;
+  width: 100%;
   display: flex;
+  flex-direction: column;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
 `;

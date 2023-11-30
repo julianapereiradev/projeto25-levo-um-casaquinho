@@ -71,15 +71,27 @@ const {
   flex-wrap: wrap;
 
   div {
-    background-color: #4d4494;
     width: 100%;
     height: 100%;
-    max-width: 25vw;
+    max-width: 22vw;
     max-height: 8vw;
     padding: 2vw;
     border-radius: 30px;
     margin-bottom: 30px;
     margin-right: 80px;
+    //background-color: #4d4494;
+
+    @media (max-width: 767px) {
+    background-color: red;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    background-color: green;
+  }
+
+  @media (min-width: 1024px) {
+    background-color: #4d4494;
+  }
   }
 
   p {

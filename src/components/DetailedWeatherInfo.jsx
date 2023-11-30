@@ -94,9 +94,14 @@ console.log('isTodaySelected', isTodaySelected)
 }
 
 const RightContainer = styled.div`
-  width: 65%;
-  padding: 15px 20px 0px 20px;
+  width: 100%;
   background-color: #ededed;
+  padding: 15px 20px 0px 20px;
+  
+@media (min-width: 1024px) {
+  width: 65%;
+  background-color: #ededed;
+}
 `;
 
 const RightBox = styled.div`
