@@ -30,16 +30,17 @@ export default function ForecastGraphInfo(props) {
           width={900}
           height={400}
           data={temps}
-          margin={{top: 30, right: 10}}
+          //margin={{top: 30, right: 10}}
         >
           <XAxis dataKey="day" />
           <YAxis
-            dataKey={"temp"}
+            dataKey="temp"
             tickFormatter={(value) =>
               `${value} ${unit === "metric" ? "°C" : "°F"}`
             }
           />
           <Tooltip
+            contentStyle={{backgroundColor: '#EFEFEF'}}
             formatter={(value) => `${value} ${unit === "metric" ? "°C" : "°F"}`}
           />
           <CartesianGrid stroke="#ffffff" />
