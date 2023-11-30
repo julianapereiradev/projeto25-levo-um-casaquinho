@@ -43,8 +43,9 @@ Para executar o projeto localmente, siga os passos abaixo:
 1. Execute o comando `npm i` para instalar as dependências.
 
 1. Crie um arquivo `.env` e insira:
-- Sua chave de API do OpenWeatherMap no formato: `VITE_API_KEY = "sua_chave_aqui"`.
-- A URL da API da seguinte forma: `VITE_API_BASE_URL = "https://api.openweathermap.org/data/2.5/"`
+- **A sua chave de API** ***- para ter acesso a chave gratuita é necessário realizar o cadastro no site [https://openweathermap.org/](https://openweathermap.org/) -*** adicione a chave no arquivo no seguinte formato: `VITE_API_KEY = "sua_chave_aqui"`
+
+- **A URL da API** no seguinte formato: `VITE_API_BASE_URL = "https://api.openweathermap.org/data/2.5/"`
 
 3. Execute o comando `npm run dev` para iniciar o servidor de desenvolvimento.
 
