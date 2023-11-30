@@ -27,13 +27,17 @@ export default function ForecastGraphInfo(props) {
   return (
       <GraphContainer>
         <LineChart
-          width={900}
+          width={800}
           height={400}
           data={temps}
-          //margin={{top: 30, right: 10}}
+          margin={{top: 30, right: 50,}}
         >
-          <XAxis dataKey="day" />
+          <XAxis 
+          dataKey="day"
+          fontSize={12}
+          />
           <YAxis
+           fontSize={12}
             dataKey="temp"
             tickFormatter={(value) =>
               `${value} ${unit === "metric" ? "°C" : "°F"}`
@@ -54,5 +58,8 @@ const GraphContainer = styled.div`
   background-color: #ffffff;
   border: 1px solid lightgray;
   margin-top: 30px;
-
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+  max-height: 400px;
 `;
