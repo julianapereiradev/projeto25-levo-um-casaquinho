@@ -11,6 +11,8 @@ export default function TakeACoatPage() {
   const [unit, setUnit] = useState("metric");
   const [weatherApi, setWeatherApi] = useState(undefined);
   const [forecastApi, setForecastApi] = useState(undefined);
+  const [temperatureList, setTemperatureList] = useState([])
+
   const MySwal = withReactContent(Swal);
 
   function WeatherApiError() {
@@ -83,6 +85,7 @@ export default function TakeACoatPage() {
         temp_min={temp_min}
         temp_max={temp_max}
         humidity={humidity}
+        temp={temp}
         wind={wind}
         name={name}
         coord={coord}
@@ -90,13 +93,16 @@ export default function TakeACoatPage() {
         setUnit={setUnit}
         forecastApi={forecastApi}
         main={main}
+        dt={dt}
+        temperatureList={temperatureList}
+        setTemperatureList={setTemperatureList}
        />
     </TakeACoatStyle>
   );
 }
 
 const TakeACoatStyle = styled.div`
-  width: 100%;
-  height: 100%;
+   width: 100vw;
+    height: 100vh;
   display: flex;
 `;

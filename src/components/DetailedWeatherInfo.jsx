@@ -1,7 +1,11 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import BlockWeatherInfo from "./DetailedInfo/BlockWeatherInfo";
+import ForecastGraphInfo from "./DetailedInfo/ForecastGraphInfo";
 
 export default function DetailedWeatherInfo(props) {
-  
+
   const {
     temp_min,
     temp_max,
@@ -14,30 +18,76 @@ export default function DetailedWeatherInfo(props) {
     setUnit,
     forecastApi,
     main,
+    temp,
   } = props;
+
+  const [isTodaySelected, setIsTodaySelected] = useState(true);
+
+console.log('isTodaySelected', isTodaySelected)
 
   return (
     <RightContainer>
       <RightBox>
-
         <RightHeaderBox>
-          <button>HOJE</button>
-          <button>PRÓXIMOS DIAS</button>
+        <LinkToChangePage
+              onClick={() => {
+                setIsTodaySelected(true);
+              }}
+              style={{ color: isTodaySelected ? "#222222" : "#C8C8C8" }}
+            >
+              Hoje
+            </LinkToChangePage>
+
+            <LinkToChangePage
+              onClick={() => {
+                setIsTodaySelected(false);
+              }}
+              style={{ color: !isTodaySelected ? "#222222" : "#C8C8C8" }}
+            >
+              Próximos dias
+            </LinkToChangePage>
         </RightHeaderBox>
 
         <RightMiddleBox>
-          <h2>Nome da Cidade</h2>
-          <h3>Lat e Long</h3>
+          <ContainerTitle>
+            <h1>{name}</h1>
+            <div>
+              <p>Lat: {coord.lat.toFixed(2)}</p>
+              <p>Long: {coord.lon.toFixed(2)}</p>
+            </div>
+          </ContainerTitle>
 
-          <h4>Ternário para saber se é para renderizar os quadrados ou o gráfico</h4>
-          <h5>Componente dos Quadrados</h5>
-          <h5>Componente do Gráfico</h5>
+          {isTodaySelected ? (
+          <BlockWeatherInfo 
+          temp_min={temp_min}
+          temp_max={temp_max}
+          humidity={humidity}
+          unit={unit} 
+          main={main} 
+          wind={wind}
+          temp={temp}
+          />
+        ) : (
+          <ForecastGraphInfo 
+          unit={unit} 
+          forecastApi={forecastApi}
+          dt={dt}
+          />
+        )}
+
         </RightMiddleBox>
 
-       <RightBottomBox>
-          <p>Dados fornecidos pela <span>Open Weather API</span></p>
-  </RightBottomBox>
-
+        <RightBottomBox>
+           <h6>
+              Dados fornecidos pela{" "}
+              <LinkToOfficialWebsite
+                target="_blank"
+                to={"https://openweathermap.org/"}
+              >
+                Open Weather API
+              </LinkToOfficialWebsite>
+            </h6>
+        </RightBottomBox>
       </RightBox>
     </RightContainer>
   );
@@ -45,9 +95,8 @@ export default function DetailedWeatherInfo(props) {
 
 const RightContainer = styled.div`
   width: 65%;
- padding: 15px 20px 0px 20px;
-  background-color: #EDEDED;
-  height: 100vh;
+  padding: 15px 20px 0px 20px;
+  background-color: #ededed;
 `;
 
 const RightBox = styled.div`
@@ -65,33 +114,69 @@ const RightHeaderBox = styled.div`
   margin-bottom: 40px;
   //background-color: yellow;
   width: 100%;
-  
+
   img {
     width: 20%;
     margin-right: 20px;
   }
 
   h1 {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 3vw;
     font-weight: 600;
   }
 `;
 
+const LinkToChangePage = styled(Link)`
+  align-self: center;
+  font-size: 3vw;
+  margin-right: 40px;
+  color: #222222;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+
 const RightMiddleBox = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  //background-color: pink;
   margin-bottom: 40px;
   width: 100%;
   height: 100%;
 `;
 
+const ContainerTitle = styled.div`
+  h1 {
+    font-size: 7.2vw;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  p {
+    font-size: 1vw;
+    margin-top: 20px;
+  }
+`;
 
 const RightBottomBox = styled.div`
   color: #222222;
   position: absolute;
   bottom: 1%;
   //background-color: #a6ff00;
+
+  h6 {
+    font-size: 1vw;
+  }
+`;
+
+const LinkToOfficialWebsite = styled(Link)`
+  color: #96a7f2;
+  text-decoration: none;
 `;
