@@ -4,7 +4,6 @@
 
 O projeto "Levo um Casaquinho?" tem como objetivo auxiliar na escolha da roupa adequada para uma viagem, considerando a cidade de destino. A aplicação simula informações climáticas, fornecendo dados como temperatura atual, máxima, mínima e uma previsão para os próximos dias.
 
-![Projeto Funcionando](./src/images/gif-projeto-25.gif)
 
 **Demo Deployada:** [Levo um Casaquinho? - Demo](https://projeto25-levo-um-casaquinho-two.vercel.app/)
 
@@ -27,6 +26,8 @@ A motivação por trás do projeto é proporcionar uma experiência intuitiva e 
 
 - React
 - React DOM
+- Axios
+- Dayjs
 - React Icons
 - React Router DOM
 - React Switch
@@ -40,7 +41,11 @@ A motivação por trás do projeto é proporcionar uma experiência intuitiva e 
 Para executar o projeto localmente, siga os passos abaixo:
 
 1. Execute o comando `npm i` para instalar as dependências.
-2. Crie um arquivo `.env` e insira sua chave de API do OpenWeatherMap no formato: `VITE_API_KEY = "sua_chave_aqui"`.
+
+1. Crie um arquivo `.env` e insira:
+- Sua chave de API do OpenWeatherMap no formato: `VITE_API_KEY = "sua_chave_aqui"`.
+- A URL da API da seguinte forma: `VITE_API_BASE_URL = "https://api.openweathermap.org/data/2.5/"`
+
 3. Execute o comando `npm run dev` para iniciar o servidor de desenvolvimento.
 
 Agora, você pode acessar o projeto em [http://localhost:5173/](http://localhost:5173/).

@@ -73,7 +73,7 @@ const {
   div {
     width: 100%;
     height: 100%;
-    max-width: 22vw;
+    max-width: 20vw;
     max-height: 8vw;
     padding: 2vw;
     border-radius: 30px;

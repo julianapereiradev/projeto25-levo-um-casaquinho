@@ -20,7 +20,7 @@ export default function TakeACoatPage() {
   }
 
   function ForecastApiError() {
-    return <p>Não foi possível pegar a temperatura dos próximos dias!</p>;
+    return <p>A cidade digitada não existe!</p>;
   }
   
   useEffect(() => {

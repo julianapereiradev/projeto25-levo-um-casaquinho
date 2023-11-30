@@ -56,7 +56,7 @@ export default function CurrentTemp(props) {
         </div>
       </LeftRowPart>
 
-      <h4 style={{ color: temperatureColor }}>{description}</h4>
+      <h4>{description}</h4>
     </LeftBoxTemperature>
   );
 }

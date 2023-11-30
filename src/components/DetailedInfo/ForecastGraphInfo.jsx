@@ -27,7 +27,7 @@ export default function ForecastGraphInfo(props) {
 
 
   return (        
-          <div style={{ width: "100%", height: 300, backgroundColor: 'white'}}>
+          <GraphContainer>
           <ResponsiveContainer>
             <ComposedChart
               width={500}
@@ -35,18 +35,18 @@ export default function ForecastGraphInfo(props) {
               data={temps}
               margin={{
                 top: 20,
-                right: 20,
+                right: 50,
                 bottom: 20,
                 left: 0
               }}
             >
-              <CartesianGrid stroke="#f5f5f5" />
+              <CartesianGrid stroke="#ffffff" />
               <XAxis
-              fontSize={11} 
+              fontSize={10} 
               dataKey="day"
               />
               <YAxis 
-              fontSize={11}
+              fontSize={10}
               dataKey="temp"
               tickFormatter={(value) =>
                 `${value} ${unit === "metric" ? "°C" : "°F"}`
@@ -58,21 +58,17 @@ export default function ForecastGraphInfo(props) {
               <Line 
               type="monotone" 
               dataKey="temp"  
-              stroke="#4c0561"  
+              stroke="#4d4494"  
               />
             </ComposedChart>
           </ResponsiveContainer>
-        </div>
+        </GraphContainer>
         
   );
 }
 
 const GraphContainer = styled.div`
-  background-color: #ffffff;
-  border: 1px solid lightgray;
-  margin-top: 30px;
-  width: 100%;
-  height: 100%;
-  max-width: 800px;
-  max-height: 400px;
+width: 100%; 
+height: 300px;
+background-color: #ffffff;
 `;

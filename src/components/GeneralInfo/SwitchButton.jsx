@@ -21,9 +21,9 @@ export default function SwitchButton(props) {
       <Switch
         checked={checked}
         onChange={handleChangeSwitch}
-        onColor="#f586ff"
+        onColor="#a19dc0"
         offColor="#E9E9EA"
-        onHandleColor="#a306b8"
+        onHandleColor="#4d4494"
         uncheckedIcon={false}
         checkedIcon={false}
         boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"

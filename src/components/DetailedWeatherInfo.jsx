@@ -94,7 +94,7 @@ const RightContainer = styled.div`
 
 @media (min-width: 1024px) {
   width: 65%;
-  background-color: #ededed;
+  padding: 15px 60px 0px 20px;
 }
 `;
 
@@ -104,6 +104,7 @@ const RightBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: normal;
+  //background-color: red;
 `;
 
 const RightHeaderBox = styled.div`
