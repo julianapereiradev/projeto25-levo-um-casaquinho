@@ -6,44 +6,44 @@ import Datetime from "./GeneralInfo/Datetime";
 import SwitchButton from "./GeneralInfo/SwitchButton";
 
 export default function GeneralWeatherInfo(props) {
-  const { setSearch, unit, setUnit, temp, weatherZeroMain, description, icon, dt } =
-    props;
+  const {
+    setSearch,
+    unit,
+    setUnit,
+    temp,
+    weatherZeroMain,
+    description,
+    icon,
+    dt,
+  } = props;
 
   return (
     <LeftContainer>
       <LeftBox>
-
         <LeftHeaderBox>
           <img src={coat} alt="" />
           <h1>Levo um casaquinho?</h1>
         </LeftHeaderBox>
 
         <LeftMiddleBox>
-          <Search setSearch={setSearch}/>
-          <CurrentTemp 
-          unit={unit}
-          setUnit={setUnit}
-          temp={temp}
-          weatherZeroMain={weatherZeroMain}
-          description={description}
-          icon={icon}
+          <Search setSearch={setSearch} />
+          <CurrentTemp
+            unit={unit}
+            temp={temp}
+            weatherZeroMain={weatherZeroMain}
+            description={description}
+            icon={icon}
           />
 
           <SeparateLine />
 
-          <Datetime 
-          dt={dt}
-          />
-         <SwitchButton
-          unit={unit}
-          setUnit={setUnit}
-         />
+          <Datetime dt={dt} />
+          <SwitchButton setUnit={setUnit} />
         </LeftMiddleBox>
 
         <LeftBottomBox>
           <p>Todos os direitos reservados. 2023.</p>
         </LeftBottomBox>
-
       </LeftBox>
     </LeftContainer>
   );
@@ -53,11 +53,11 @@ const LeftContainer = styled.div`
   width: 100%;
   padding: 15px 20px 0px 20px;
 
-@media (min-width: 1024px) {
-  width: 35%;
-  background-color: #FFFFFF;
-  height: 100vh;
-}
+  @media (min-width: 1024px) {
+    width: 35%;
+    background-color: #ffffff;
+    height: 100vh;
+  }
 `;
 
 const LeftBox = styled.div`
@@ -72,24 +72,23 @@ const LeftHeaderBox = styled.div`
   color: #222222;
   display: flex;
   align-items: center;
-  //background-color: yellow;
   width: 100%;
-  
+
   img {
     width: 6vw;
     margin-right: 20px;
 
     @media (min-width: 600px) and (max-width: 1023px) {
-    width: 8vw;
+      width: 8vw;
     }
 
     @media (max-width: 599px) {
-    width: 15vw;
+      width: 15vw;
     }
   }
 
   h1 {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 3vw;
     font-weight: 600;
 
@@ -101,7 +100,6 @@ const LeftHeaderBox = styled.div`
       font-size: 8vw;
     }
   }
-
 `;
 
 const LeftMiddleBox = styled.div`
@@ -116,30 +114,28 @@ const LeftMiddleBox = styled.div`
 const SeparateLine = styled.div`
   width: 70%;
   height: 2px;
-  background: #EDEDED;
+  background: #ededed;
   margin: 20px 0px 30px 0px;
 `;
 
 const LeftBottomBox = styled.div`
   @media (min-width: 1024px) {
-  color: #222222;
-  position: absolute;
-  bottom: 1%;
-}
-
-p {
-  font-size: 1vw;
-
-  @media (min-width: 600px) and (max-width: 1023px) {
-    font-size: 1.2vw;
-    margin-bottom: 2px;
+    color: #222222;
+    position: absolute;
+    bottom: 1%;
   }
 
-  @media (max-width: 599px) {
-      font-size: 2vw;
-    margin-bottom: 2px;
+  p {
+    font-size: 1vw;
+
+    @media (min-width: 600px) and (max-width: 1023px) {
+      font-size: 1.2vw;
+      margin-bottom: 2px;
     }
-}
 
-
+    @media (max-width: 599px) {
+      font-size: 2vw;
+      margin-bottom: 2px;
+    }
+  }
 `;

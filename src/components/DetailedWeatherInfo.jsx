@@ -5,47 +5,34 @@ import BlockWeatherInfo from "./DetailedInfo/BlockWeatherInfo";
 import ForecastGraphInfo from "./DetailedInfo/ForecastGraphInfo";
 
 export default function DetailedWeatherInfo(props) {
-
-  const {
-    temp_min,
-    temp_max,
-    humidity,
-    dt,
-    wind,
-    name,
-    coord,
-    unit,
-    setUnit,
-    forecastApi,
-    main,
-    temp,
-  } = props;
+  const { temp_min, temp_max, humidity, wind, name, coord, unit, forecastApi } =
+    props;
 
   const [isTodaySelected, setIsTodaySelected] = useState(true);
 
-console.log('isTodaySelected', isTodaySelected)
+  console.log("isTodaySelected", isTodaySelected);
 
   return (
     <RightContainer>
       <RightBox>
         <RightHeaderBox>
-        <LinkToChangePage
-              onClick={() => {
-                setIsTodaySelected(true);
-              }}
-              style={{ color: isTodaySelected ? "#222222" : "#C8C8C8" }}
-            >
-              Hoje
-            </LinkToChangePage>
+          <LinkToChangePage
+            onClick={() => {
+              setIsTodaySelected(true);
+            }}
+            style={{ color: isTodaySelected ? "#222222" : "#C8C8C8" }}
+          >
+            Hoje
+          </LinkToChangePage>
 
-            <LinkToChangePage
-              onClick={() => {
-                setIsTodaySelected(false);
-              }}
-              style={{ color: !isTodaySelected ? "#222222" : "#C8C8C8" }}
-            >
-              Próximos dias
-            </LinkToChangePage>
+          <LinkToChangePage
+            onClick={() => {
+              setIsTodaySelected(false);
+            }}
+            style={{ color: !isTodaySelected ? "#222222" : "#C8C8C8" }}
+          >
+            Próximos dias
+          </LinkToChangePage>
         </RightHeaderBox>
 
         <RightMiddleBox>
@@ -58,29 +45,28 @@ console.log('isTodaySelected', isTodaySelected)
           </ContainerTitle>
 
           {isTodaySelected ? (
-          <BlockWeatherInfo 
-          temp_min={temp_min}
-          temp_max={temp_max}
-          humidity={humidity}
-          unit={unit} 
-          main={main} 
-          wind={wind}
-          temp={temp}
-          />
-        ) : (
-          <ForecastGraphInfo 
-          unit={unit} 
-          forecastApi={forecastApi}
-          dt={dt}
-          />
-        )}
-
+            <BlockWeatherInfo
+              temp_min={temp_min}
+              temp_max={temp_max}
+              humidity={humidity}
+              unit={unit}
+              wind={wind}
+            />
+          ) : (
+            <ForecastGraphInfo unit={unit} forecastApi={forecastApi} />
+          )}
         </RightMiddleBox>
 
         <RightBottomBox>
-           <h6>
-              Dados fornecidos pela <LinkToOfficialWebsite target="_blank" to={"https://openweathermap.org/"}>Open Weather API</LinkToOfficialWebsite>
-            </h6>
+          <h6>
+            Dados fornecidos pela{" "}
+            <LinkToOfficialWebsite
+              target="_blank"
+              to={"https://openweathermap.org/"}
+            >
+              Open Weather API
+            </LinkToOfficialWebsite>
+          </h6>
         </RightBottomBox>
       </RightBox>
     </RightContainer>
@@ -92,10 +78,10 @@ const RightContainer = styled.div`
   background-color: #ededed;
   padding: 15px 20px 0px 20px;
 
-@media (min-width: 1024px) {
-  width: 65%;
-  padding: 15px 60px 0px 20px;
-}
+  @media (min-width: 1024px) {
+    width: 65%;
+    padding: 15px 60px 0px 20px;
+  }
 `;
 
 const RightBox = styled.div`
@@ -104,7 +90,6 @@ const RightBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: normal;
-  //background-color: red;
 `;
 
 const RightHeaderBox = styled.div`
@@ -112,7 +97,6 @@ const RightHeaderBox = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 40px;
-  //background-color: yellow;
   width: 100%;
 `;
 
@@ -122,16 +106,15 @@ const LinkToChangePage = styled(Link)`
   margin-right: 40px;
   color: #222222;
   text-decoration: none;
-  
+
   @media (max-width: 599px) {
     font-size: 6vw;
-    }
+  }
 
   &:hover {
     text-decoration: underline;
   }
 `;
-
 
 const RightMiddleBox = styled.div`
   display: flex;
@@ -146,7 +129,7 @@ const ContainerTitle = styled.div`
     font-size: 7.2vw;
 
     @media (max-width: 599px) {
-    font-size: 12vw;
+      font-size: 12vw;
     }
   }
 
@@ -162,32 +145,31 @@ const ContainerTitle = styled.div`
     margin-bottom: 20px;
 
     @media (min-width: 600px) and (max-width: 1023px) {
-    font-size: 1.3vw;
-  }
+      font-size: 1.3vw;
+    }
 
-  @media (max-width: 599px) {
-    font-size: 3.5vw;
+    @media (max-width: 599px) {
+      font-size: 3.5vw;
     }
   }
 `;
 
 const RightBottomBox = styled.div`
-
   @media (min-width: 1024px) {
-  color: #222222;
-  position: absolute;
-  bottom: 1%;
+    color: #222222;
+    position: absolute;
+    bottom: 1%;
   }
 
   h6 {
     font-size: 1vw;
 
     @media (min-width: 600px) and (max-width: 1023px) {
-    font-size: 1.2vw;
-    margin-bottom: 2px;
-  }
+      font-size: 1.2vw;
+      margin-bottom: 2px;
+    }
 
-  @media (max-width: 599px) {
+    @media (max-width: 599px) {
       font-size: 2vw;
       margin-bottom: 2px;
     }

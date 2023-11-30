@@ -1,70 +1,54 @@
 import styled from "styled-components";
 
 export default function BlockWeatherInfo(props) {
+  const { temp_min, temp_max, humidity, unit, wind } = props;
 
-const {
-    temp_min,
-    temp_max,
-    humidity,
-    unit,
-    main, 
-    wind,
-    temp
-} = props
+  return (
+    <>
+      <MoreWeatherInfo>
+        <div>
+          <p>Mínima</p>
+          <h2>
+            {unit === "metric"
+              ? `${Math.round(temp_min - 273.15)}° C`
+              : `${Math.round(temp_min * 1.8 - 459.67)}° F`}
+          </h2>
+        </div>
 
-    return (
-        <>
-        <MoreWeatherInfo>
-          <div>
-            <p>Mínima</p>
-            <h2>
-            {
-                unit === 'metric' ?
-                `${Math.round(temp_min - 273.15)}° C` :
-                `${Math.round(temp_min * 1.8 - 459.67)}° F`
-            }
-            </h2>
-          </div>
+        <div>
+          <p>Máxima</p>
+          <h2>
+            {unit === "metric"
+              ? `${Math.round(temp_max - 273.15)}° C`
+              : `${Math.round(temp_max * 1.8 - 459.67)}° F`}
+          </h2>
+        </div>
 
-          <div>
-            <p>Máxima</p>
-            <h2>
-            {
-                unit === 'metric' ?
-                `${Math.round(temp_max - 273.15)}° C` :
-                `${Math.round(temp_max * 1.8 - 459.67)}° F`
-            }
-            </h2>
-          </div>
+        <div>
+          <p>Umidade</p>
+          <h2>{humidity}%</h2>
+        </div>
 
-          <div>
-            <p>Umidade</p>
-            <h2>{humidity}%</h2>
-          </div>
+        <div>
+          <p>Velocidade do vento</p>
+          <h2>
+            {unit === "metric"
+              ? `${wind.speed} m/s`
+              : `${parseInt(wind.speed * 2.24694)} mi/h`}
+          </h2>
+        </div>
+      </MoreWeatherInfo>
 
-          <div>
-            <p>Velocidade do vento</p>
-            <h2>
-            {
-                 unit === 'metric' ?
-                `${wind.speed} m/s` :
-                `${parseInt(wind.speed * 2.24694)} mi/h`
-                }
-            </h2>
-          </div>
-        </MoreWeatherInfo>
+      <UseOrNotUseCoat>
+        {temp_min < 290.15 || temp_max < 290.15
+          ? "Você deve levar um casaquinho!"
+          : "Não, você não deve levar um casaquinho!"}
+      </UseOrNotUseCoat>
+    </>
+  );
+}
 
-        <UseOrNotUseCoat>
-           { temp_min < 290.15 || temp_max < 290.15
-              ? ("Você deve levar um casaquinho!")
-              : ("Não, você não deve levar um casaquinho!")} 
-         </UseOrNotUseCoat>
-      </>
-    );
-  }
-  
-
-  const MoreWeatherInfo = styled.div`
+const MoreWeatherInfo = styled.div`
   margin-top: 40px;
   margin-bottom: 30px;
   display: flex;
@@ -81,15 +65,15 @@ const {
     margin-right: 80px;
     background-color: #4d4494;
 
-  @media (min-width: 600px) and (max-width: 1023px) {
-    max-width: 30vw;
-    max-height: 10vw;
-  }
+    @media (min-width: 600px) and (max-width: 1023px) {
+      max-width: 30vw;
+      max-height: 10vw;
+    }
 
-  @media (max-width: 599px) {
-    max-width: 70vw;
-    max-height: 50vw;
-    padding: 4vw;
+    @media (max-width: 599px) {
+      max-width: 70vw;
+      max-height: 50vw;
+      padding: 4vw;
     }
   }
 
@@ -101,10 +85,10 @@ const {
 
     @media (min-width: 600px) and (max-width: 1023px) {
       font-size: 2vw;
-  }
+    }
 
-  @media (max-width: 599px) {
-    font-size: 4vw;
+    @media (max-width: 599px) {
+      font-size: 4vw;
     }
   }
 
@@ -115,10 +99,10 @@ const {
 
     @media (min-width: 600px) and (max-width: 1023px) {
       font-size: 3vw;
-  }
+    }
 
-  @media (max-width: 599px) {
-    font-size: 8vw;
+    @media (max-width: 599px) {
+      font-size: 8vw;
     }
   }
 `;
@@ -134,5 +118,5 @@ const UseOrNotUseCoat = styled.div`
 
   @media (max-width: 599px) {
     font-size: 4vw;
-    }
+  }
 `;

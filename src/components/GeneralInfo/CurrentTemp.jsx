@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default function CurrentTemp(props) {
-  const { unit, setUnit, temp, weatherZeroMain, description, icon } = props;
+  const { unit, temp, weatherZeroMain, description, icon } = props;
 
   const api = {
     iconBase: "https://openweathermap.org/img/wn/",
@@ -11,25 +11,18 @@ export default function CurrentTemp(props) {
     switch (weatherMain) {
       case "Clear":
         return "orange";
-
       case "Clouds":
         return "darkgray";
-
       case "Rain":
         return "blue";
-
       case "Snow":
         return "slategray";
-
       case "Thunderstorm":
         return "purple";
-
       case "Drizzle":
         return "lightblue";
-
       case "Mist":
         return "lightgray";
-
       default:
         return "red";
     }
@@ -75,10 +68,10 @@ const LeftBoxTemperature = styled.div`
 
     @media (min-width: 600px) and (max-width: 1023px) {
       font-size: 2.8vw;
-  }
+    }
 
-  @media (max-width: 599px) {
-    font-size: 6vw;
+    @media (max-width: 599px) {
+      font-size: 6vw;
     }
   }
 `;
@@ -94,10 +87,10 @@ const LeftRowPart = styled.div`
 
     @media (min-width: 600px) and (max-width: 1023px) {
       width: 12vw;
-  }
+    }
 
-  @media (max-width: 599px) {
-    width: 20vw;
+    @media (max-width: 599px) {
+      width: 20vw;
     }
   }
 `;
@@ -112,10 +105,10 @@ const InternTempPart = styled.div`
 
     @media (min-width: 600px) and (max-width: 1023px) {
       font-size: 12vw;
-  }
+    }
 
-  @media (max-width: 599px) {
-    font-size: 20vw;
+    @media (max-width: 599px) {
+      font-size: 20vw;
     }
   }
 
@@ -124,10 +117,10 @@ const InternTempPart = styled.div`
 
     @media (min-width: 600px) and (max-width: 1023px) {
       font-size: 6.5vw;
-  }
+    }
 
-  @media (max-width: 599px) {
-    font-size: 10vw;
+    @media (max-width: 599px) {
+      font-size: 10vw;
     }
   }
 `;
