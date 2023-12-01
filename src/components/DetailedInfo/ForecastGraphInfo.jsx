@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import {
-  CartesianGrid,
   Line,
   Tooltip,
   XAxis,
   YAxis,
   ComposedChart,
   ResponsiveContainer,
+  LineChart,
 } from "recharts";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
@@ -38,8 +38,12 @@ export default function ForecastGraphInfo(props) {
             left: 0,
           }}
         >
-          <CartesianGrid stroke="#ffffff" />
-          <XAxis fontSize={10} dataKey="day" />
+          <LineChart stroke="#ffffff" />
+          <XAxis 
+          fontSize={10} 
+          dataKey="day" 
+          interval={"equidistantPreserveStart"}
+          />
           <YAxis
             fontSize={10}
             dataKey="temp"
