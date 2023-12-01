@@ -39,10 +39,10 @@ export default function ForecastGraphInfo(props) {
           }}
         >
           <LineChart stroke="#ffffff" />
-          <XAxis 
-          fontSize={10} 
-          dataKey="day" 
-          interval={"equidistantPreserveStart"}
+          <XAxis
+            fontSize={10}
+            dataKey="day"
+            interval={"equidistantPreserveStart"}
           />
           <YAxis
             fontSize={10}
